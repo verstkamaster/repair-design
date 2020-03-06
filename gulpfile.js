@@ -1,28 +1,47 @@
-const gulp = require('gulp');
-const browserSync = require('browser-sync').create();
+const {src, dest, watch} = require('gulp');
+const browserSync = require('browser-sync');
+//подключаем cssmin
 const cssmin = require('gulp-cssmin');
 const rename = require('gulp-rename');
-
-gulp.task('hello', function(done) {
-   console.log('Привет мир!');
-   done();
-});
+// подключаем gulp-sass
+const sass = require('gulp-sass');
+//autoprefixer
+const autoprefixer = require('gulp-autoprefixer');
 
 // Static server
-gulp.task('server', function() {
+function bs() {
    browserSync.init({
        server: {
            baseDir: "./"
        }
    });
-});
-gulp.watch("./*.html").on('change', browserSync.reload);
-//  Minify CSS
-gulp.task('mincss', function () {
-   return gulp.src('./*.css')
-        .pipe(cssmin())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('./'));
-});
+   };
 
-// gulp.watch("./*.css");
+//  Minify CSS
+// function mincss() {
+//         .src('./css/*.css')
+//         .pipe(cssmin())
+//         .pipe(rename({suffix: '.min'}))
+//         .pipe(dest('./css'));
+//         };
+
+// используем GULP-SASS
+// gulp.task('sass', function(done){
+//      gulp.src('./sass/**/*.scss')
+//      .pipe(sass().on('error', sass.logError)) 
+//      // используем gulp-sass
+//      .pipe(gulp.dest('./css'))
+//      done();
+// });
+watch("./*.html").on('change', browserSync.reload);
+watch('./sass/**/*.scss', serveSass);
+watch("./*.js/*.js").on('change', browserSync.reload);
+ // используем autoprefixer
+function serveSass() { 
+   return src('./sass/*.sass') 
+       .pipe(sass()) 
+      //  .pipe(autoprefixer())
+       .pipe(dest('./css')) 
+       .pipe(browserSync.stream());
+      };
+exports.serve = bs;      
