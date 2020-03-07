@@ -7,7 +7,6 @@ const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 //autoprefixer
 const autoprefixer = require('gulp-autoprefixer');
-
 // Static server
 function bs() {
    browserSync.init({
@@ -16,6 +15,36 @@ function bs() {
        }
    });
    };
+ // используем autoprefixer
+function serveSass() { 
+   return src("./sass/*.+(sass|scss)").on(error, sass.logError) 
+       .pipe(sass()) 
+       .pipe(autoprefixer({
+        cascade: false
+       }))
+       .pipe(dest('./css')) 
+       .pipe(browserSync.stream());
+      };
+
+watch("./*.html").on('change', browserSync.reload);
+watch("./sass/*.+(sass|scss)", serveSass);
+watch("./*.js/*.js").on('change', browserSync.reload);
+exports.serve = bs;      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //  Minify CSS
 // function mincss() {
@@ -33,15 +62,3 @@ function bs() {
 //      .pipe(gulp.dest('./css'))
 //      done();
 // });
-watch("./*.html").on('change', browserSync.reload);
-watch('./sass/**/*.scss', serveSass);
-watch("./*.js/*.js").on('change', browserSync.reload);
- // используем autoprefixer
-function serveSass() { 
-   return src('./sass/*.sass') 
-       .pipe(sass()) 
-      //  .pipe(autoprefixer())
-       .pipe(dest('./css')) 
-       .pipe(browserSync.stream());
-      };
-exports.serve = bs;      
