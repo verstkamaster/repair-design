@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/verstkamaster/repair-design#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.2.0",
@@ -25,7 +26,6 @@
     "gulp-sass": "^4.0.2"
   },
   "dependencies": {
-    "browser-sync": "^2.26.7",
     "browsersync": "0.0.1-security",
     "gulp-cli": "^2.2.0"
   }
