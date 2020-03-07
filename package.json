@@ -25,7 +25,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.0.2"
   },
-  "dependencies": {
+  "dependencies": {    
     "browsersync": "0.0.1-security",
     "gulp-cli": "^2.2.0"
   }

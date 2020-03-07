@@ -1,13 +1,2 @@
-.body {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-}
-
-.body .header {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  margin-bottom: 5px;
-}
-/*# sourceMappingURL=style.css.map */
+.header {
+  margin-top: 5px; }
